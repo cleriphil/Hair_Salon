@@ -55,3 +55,17 @@ describe('path to viewing a the clients of a stylist', {:type => :feature}) do
     expect(page).to have_content('St. Sebastian')
   end
 end
+
+describe('path for updated the name of a stylist', {:type => :feature}) do
+  it('allows a user to update the name of a stylist') do
+    visit('/stylists/new')
+    fill_in('name', :with => 'Hera')
+    click_button('Add Stylist')
+    visit('/stylists')
+    click_link('Hera')
+    click_link("Edit Hera's Name")
+    fill_in('name', :with => 'Herald')
+    click_button('Edit Stylist')
+    expect(page).to have_content("Herald's Clients")
+  end
+end
