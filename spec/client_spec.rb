@@ -38,4 +38,13 @@ describe(Client) do
     expect(test_client.==(test_client_2))
     end
   end
+  describe('.find') do
+    it('finds the client by its id') do
+      test_client = Client.new(:id => nil, :name => "Lucretia",:stylist_id => 2)
+      test_client.save()
+      test_client_2 = Client.new(:id => nil, :name => "Lasinia",:stylist_id => 5)
+      test_client_2.save()
+      expect(Client.find(test_client_2.id())).to(eq(test_client_2))
+    end
+  end
 end
