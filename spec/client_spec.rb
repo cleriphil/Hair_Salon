@@ -19,5 +19,23 @@ describe(Client) do
       expect(test_client.stylist_id()).to(eq(2))
     end
   end
-
+  describe('.all') do
+    it('begins as an empty array') do
+    expect(Client.all()).to(eq([]))
+    end
+  end
+  describe('#save') do
+    it('saves the client to the database') do
+      test_client = Client.new(:id => 1, :name => "Lucretia",:stylist_id => 2)
+      test_client.save()
+      expect(Client.all()).to(eq([test_client]))
+    end
+  end
+  describe('#==') do
+    it('is the same as another stylist with the same attributes') do
+    test_client = Client.new(:id => 1, :name => "Lucretia",:stylist_id => 2)
+    test_client_2 = Client.new(:id => 1, :name => "Lucretia",:stylist_id => 2)
+    expect(test_client.==(test_client_2))
+    end
+  end
 end
