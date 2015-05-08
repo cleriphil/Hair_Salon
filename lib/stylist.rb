@@ -1,9 +1,11 @@
 class Stylist
 attr_reader(:id, :name)
+
   define_method(:initialize) do |attributes|
     @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
   end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO stylists (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
@@ -22,5 +24,13 @@ attr_reader(:id, :name)
 
   define_method(:==) do |another_stylist|
     self.name().==(another_stylist.name()).&(self.id().==(another_stylist.id()))
+  end
+
+  define_singleton_method(:find) do |id|
+    @id = id
+    result = DB.exec("SELECT * FROM stylists WHERE id = #{id}")
+    @name = result.first().fetch('name')
+    Stylist.new({:id => @id, :name => @name})
+    #making a 'new' stylist identical to the one we are looking for
   end
 end

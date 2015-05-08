@@ -25,4 +25,18 @@ describe(Stylist) do
     expect(Stylist.all()).to(eq([test_stylist]))
     end
   end
+  describe('#==') do
+    it('is the same stylist if it has the same name and id') do
+    test_stylist = Stylist.new(:id => nil, :name => "lynn")
+    test_stylist_2 = Stylist.new(:id => nil, :name => "lynn")
+    expect(test_stylist.==(test_stylist_2))
+    end
+  end
+  describe('.find') do
+    it('finds a stylist by his/her id') do
+    test_stylist = Stylist.new(:id => nil, :name => "lynn")
+    test_stylist.save()
+    expect(Stylist.find(test_stylist.id())).to(eq(test_stylist))
+    end
+  end
 end
