@@ -11,24 +11,40 @@ get('/') do
   erb(:index)
 end
 
-get('/stylists') do
-  @stylists = Stylist.all()
-  erb(:stylists)
-
-end
-
 get('/stylists/new') do
   erb(:stylist_form)
 end
 
+get('/stylists') do
+  @stylists = Stylist.all()
+  erb(:stylists)
+end
+
 get('/stylists/:id') do
-  @clients = stylist.all_clients()
+  @stylist = Stylist.find(params.fetch('id').to_i())
+  # @clients = @new_stylist.all_clients()
   erb(:stylist)
  end
 
-post('/stylists') do
-  @name = params.fetch('name')
-  new_stylist = Stylist.new({:id => nil, :name => @name})
-  new_stylist.save()
-  erb(:stylist_success)
+ post('/stylists') do
+   name = params.fetch('name')
+   new_stylist = Stylist.new({:id => nil, :name => name})
+   new_stylist.save()
+   erb(:stylist_success)
+ end
+
+ get('/stylists/:id/clients/new') do
+   @stylist = Stylist.find(params.fetch('id').to_i())
+   erb(:client_form)
+ end
+
+
+post('/clients') do
+  name = params.fetch('name')
+  stylist_id = params.fetch('stylist_id').to_i()
+  new_client = Client.new({:id => nil, :name => name, :stylist_id => stylist_id})
+  new_client.save()
+  @stylist = Stylist.find(stylist_id)
+  @stylist.add_client(new_client)
+  erb(:client_success)
 end
