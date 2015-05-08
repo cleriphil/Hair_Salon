@@ -33,4 +33,15 @@ attr_reader(:id, :name)
     Stylist.new({:id => @id, :name => @name})
     #making a 'new' stylist identical to the one we are looking for
   end
+
+  define_method(:update) do |attributes|
+    @id = self.id()
+    @name = attributes.fetch(:name, @name)
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id}")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM stylists WHERE id = #{self.id()}")
+  end
+
 end
