@@ -26,7 +26,12 @@ class Client
   end
 
   define_method(:==) do |another_client|
-    self.name().==(another_client.name()).&(self.id().==(another_client.id())).&(self.stylist_id.==(another_client.stylist_id()))
+    self.name().==(another_client.name()).&(self.id().to_i().==(another_client.id().to_i())).&(self.stylist_id.to_i().==(another_client.stylist_id().to_i()))
+
+
+    # self.title().==(another_book.title()).&(self.id().to_i().==(another_book.id().to_i())).&(self.author().==(another_book.author()))
+
+
   end
 
   define_singleton_method(:find) do |id|
@@ -37,13 +42,14 @@ class Client
     Client.new(:id => @id, :name => @name, :stylist_id => @stylist_id)
   end
 
-  define_method(:update) do |attributes|
+  define_method(:update) do |attributes| #problem
     @id = self.id()
     @name = attributes.fetch(:name, @name)
     @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
-    DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = @id;")
-    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = @id;")
+    DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id};")
   end
+  
   define_method(:delete) do
     DB.exec("DELETE FROM clients WHERE id = #{self.id()};")
   end

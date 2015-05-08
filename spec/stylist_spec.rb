@@ -55,23 +55,33 @@ describe(Stylist) do
     expect(Stylist.all()).to(eq([]))
     end
   end
-  # describe('#all_clients') do
-  #   it('lists all the clients that the stylist has') do
-  #     test_stylist = Stylist.new(:id => nil, :name => "lynn")
-  #     test_stylist.save()
-  #   end
-  # end
-
   describe('#add_client') do
     it('adds a client to the stylist') do
     test_stylist = Stylist.new(:id => nil, :name => "lynn")
     test_stylist.save()
-    test_client = Client.new(:id => nil, :name => "Lucretia",:stylist_id => nil)
+    test_client = Client.new(:id => nil, :name => "Lucretia", :stylist_id => nil)
     test_client.save()
     test_stylist.add_client(test_client)
+    test_client_2 = Client.new(:id => nil, :name => "Lindsey", :stylist_id => nil)
+    test_client_2.save()
+    test_stylist.add_client(test_client_2)
     expect(test_client.stylist_id()).to(eq(test_stylist.id()))
+    expect(test_client_2.stylist_id()).to(eq(test_stylist.id()))
     end
   end
-
+  describe('#all_clients') do
+    it('lists all the clients that the stylist has') do
+      test_stylist = Stylist.new(:id => nil, :name => "lynn")
+      test_stylist.save()
+      test_client = Client.new(:id => nil, :name => "Lucretia",:stylist_id => nil)
+      test_client.save()
+      test_client_2 = Client.new(:id => nil, :name => "Lasinia",:stylist_id => nil)
+      test_client_2.save()
+      test_stylist.add_client(test_client)
+      test_stylist.add_client(test_client_2)
+      expect(test_stylist.all_clients()).to(eq([test_client, test_client_2]))
+      expect(test_client.stylist_id()).to(eq(test_stylist.id()))
+    end
+  end
   #delete_client ?
 end

@@ -44,8 +44,20 @@ attr_reader(:id, :name)
     DB.exec("DELETE FROM stylists WHERE id = #{self.id()}")
   end
 
-  define_method(:add_client) do |client|
+  define_method(:add_client) do |client| #problem
     stylist_id = self.id()
     client.update({:stylist_id => stylist_id})
+  end
+
+  define_method(:all_clients) do
+    returned_clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()};")
+    all_clients = []
+    returned_clients.each() do |client|
+      id = client.fetch('id')
+      name = client.fetch('name')
+      # stylist_id = client.fetch('stylist_id')
+      all_clients.push(Client.new(:id => id, :name => name, :stylist_id => self.id()))
+    end
+  all_clients
   end
 end
