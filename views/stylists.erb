@@ -1,0 +1,15 @@
+<h1>Your Stylists</h1>
+
+<ul>
+<% @stylists.each() do |stylist| %>
+ <a href = '/stylists/<%= stylist.id() %>'><%= stylist.name() %></a>
+<% end %>
+</ul>
+
+
+<a href='stylists/new'>Add a Stylist</a>
+
+<!-- view
+add
+update
+delete -->
