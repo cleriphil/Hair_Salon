@@ -55,4 +55,12 @@ describe(Client) do
       expect(test_client.name()).to(eq("Lucra"))
     end
   end
+  describe('#delete') do
+    it('deletes a client from the database') do
+    test_client = Client.new(:id => nil, :name => "Lucretia",:stylist_id => 2)
+    test_client.save()
+    test_client.delete()
+    expect(Client.all()).to(eq([]))
+    end
+  end
 end
