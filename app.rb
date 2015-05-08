@@ -60,3 +60,9 @@ patch('/stylists/:id') do
   @stylist.update({:name => name})
   erb(:stylist)
 end
+
+get ('/stylists/:id/clients/:client_id/edit') do
+  @stylist = Stylist.find(params.fetch('id').to_i())
+  @client = Client.find(params.fetch('client_id').to_i())
+  erb(:client_edit)
+end

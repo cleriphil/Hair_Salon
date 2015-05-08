@@ -56,7 +56,7 @@ describe('path to viewing a the clients of a stylist', {:type => :feature}) do
   end
 end
 
-describe('path for updated the name of a stylist', {:type => :feature}) do
+describe('path for updating the name of a stylist', {:type => :feature}) do
   it('allows a user to update the name of a stylist') do
     visit('/stylists/new')
     fill_in('name', :with => 'Hera')
@@ -67,5 +67,24 @@ describe('path for updated the name of a stylist', {:type => :feature}) do
     fill_in('name', :with => 'Herald')
     click_button('Edit Stylist')
     expect(page).to have_content("Herald's Clients")
+  end
+end
+
+describe('path for updating the name of a client', {:type => :feature}) do
+  it('allows a user to edit the name of a client') do
+    visit('/stylists/new')
+    fill_in('name', :with => 'Hera')
+    click_button('Add Stylist')
+    visit('/stylists')
+    click_link('Hera')
+    click_link('Add a Client')
+    fill_in('name', :with => 'St. Sebastian')
+    click_button('Add Client')
+    visit('/stylists')
+    click_link('Hera')
+    click_link('Update Name')
+    fill_in('name', :with => 'Sal')
+    click_button('Edit Client')
+    expect(page).to have_content("Sal")
   end
 end

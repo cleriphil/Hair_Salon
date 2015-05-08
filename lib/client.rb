@@ -42,14 +42,14 @@ class Client
     Client.new(:id => @id, :name => @name, :stylist_id => @stylist_id)
   end
 
-  define_method(:update) do |attributes| #problem
+  define_method(:update) do |attributes| 
     @id = self.id()
     @name = attributes.fetch(:name, @name)
     @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
     DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id};")
     DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id};")
   end
-  
+
   define_method(:delete) do
     DB.exec("DELETE FROM clients WHERE id = #{self.id()};")
   end
