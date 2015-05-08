@@ -83,5 +83,4 @@ describe(Stylist) do
       expect(test_client.stylist_id()).to(eq(test_stylist.id()))
     end
   end
-  #delete_client ?
 end

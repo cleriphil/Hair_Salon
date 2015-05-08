@@ -1,13 +1,13 @@
 <h2><%= @stylist.name() %>'s Clients</h2>
 <ul>
 <% @stylist.all_clients().each() do |client| %>
-<li><%= client.name() %> - - - <a href="/stylists/<%= @stylist.id() %>/clients/<%= client.id()%>/edit">Update Name</li>
+<li><%= client.name() %> - <a href="/stylists/<%= @stylist.id() %>/clients/<%= client.id()%>/edit">Update Name</li>
 <% end %>
 </ul>
 
 <a href="/stylists/<%= @stylist.id() %>/clients/new">Add a Client</a>
 <br>
-<a href="/stylists/<%= @stylist.id() %>/edit">Edit <%= @stylist.name() %>'s Name</a>
+<a href="/stylists/<%= @stylist.id() %>/edit">Edit <%= @stylist.name() %></a>
 <br>
 <a href="/stylists">View Stylists</a>
 <br>

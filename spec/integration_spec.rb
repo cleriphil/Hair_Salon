@@ -63,7 +63,7 @@ describe('path for updating the name of a stylist', {:type => :feature}) do
     click_button('Add Stylist')
     visit('/stylists')
     click_link('Hera')
-    click_link("Edit Hera's Name")
+    click_link("Edit Hera")
     fill_in('name', :with => 'Herald')
     click_button('Edit Stylist')
     expect(page).to have_content("Herald's Clients")
@@ -86,5 +86,18 @@ describe('path for updating the name of a client', {:type => :feature}) do
     fill_in('name', :with => 'Sal')
     click_button('Edit Client')
     expect(page).to have_content("Sal")
+  end
+end
+
+describe('path for deleting a stylist', {:type => :feature}) do
+  it('allows a user to delete a stylist') do
+    visit('/stylists/new')
+    fill_in('name', :with => 'Hera')
+    click_button('Add Stylist')
+    visit('/stylists')
+    click_link('Hera')
+    click_link('Edit Hera')
+    click_button('Delete Stylist')
+    expect(page).to have_no_content('Hera')
   end
 end
