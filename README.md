@@ -5,7 +5,7 @@ Hair Salon is an app to keep track of stylists and clients. Users may add and de
 The app allows for users to update the names of clients. All information is saved into a database. 
 
 
-### Setup Instrucitons:
+### Setup Instructions:
 
 Run the following in terminal:
 
