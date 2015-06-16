@@ -11,7 +11,7 @@ Run the following in terminal:
 
 postgres
 
-psql
+psql  
 
 CREATE DATABASE hair_salon;
 
